@@ -1,0 +1,25 @@
+NOTE
+----
+
+Patches between 5.8.1 and 5.8.2 modified Makefile.SH and installperl
+sufficiently to confuse the shipped patch files. 
+
+Performing the 'make patch' produces the following fatal error.
+
+
+red@citalopram Cross $ make patch
+cd .. ; patch -p1 < Cross/Makefile.SH.patch
+missing header for unified diff at line 3 of patch
+patching file Makefile.SH
+Hunk #12 succeeded at 1152 (offset 5 lines).
+cd .. ; patch -p1 < Cross/installperl.patch ; mv installperl installperl-patched
+missing header for unified diff at line 3 of patch
+patching file installperl
+Hunk #1 FAILED at 3.
+Hunk #2 succeeded at 933 (offset 2 lines).
+1 out of 2 hunks FAILED -- saving rejects to file installperl.rej
+cd .. ; sed -e 's/XXSTRIPXX/arm-linux/' installperl-patched > installperl
+
+
+This archive contains a replacement /Cross directory which fixes
+this issue.
